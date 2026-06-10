@@ -1,9 +1,13 @@
 [project]
-name = "function-equivalence-test"
-version = "0.1.0"
+name = "elastic-ai.equi-checker"
+dynamic = ["version"]
 description = "Framework for Enabling Hardware-Software Co-Design / Equivalence Checking"
+authors = [{ name = "Intelligent Embedded Systems Lab - University of Duisburg Essen" }]
 readme = "README.md"
-requires-python = ">=3.13,<3.14"
+license = "MIT"
+license-files = ["LICENSE"]
+
+requires-python = ">=3.12"
 dependencies = [
     "cffi",
     "hypothesis",
@@ -22,13 +26,21 @@ dev = [
   "pre-commit>=4.0.1",
   "tach>=0.23.0"
 ]
-utils = ["mypy>=1.13.0", "ruff>=0.11.0", "ty>=0.0.32", "tombi>=1.1.1"]
-
+utils = [
+  "mypy>=1.13.0",
+  "ruff>=0.11.0",
+  "ty>=0.0.32",
+  "tombi>=1.1.1"
+]
 
 
 [build-system]
 requires = ["hatch-vcs", "hatchling", "wheel"]
 build-backend = "hatchling.build"
+
+
+[tool.hatch.version]
+source = "vcs"
 
 
 [tool.hatch.build.targets.sdist]
