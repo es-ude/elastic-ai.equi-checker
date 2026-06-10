@@ -1,6 +1,6 @@
 from hypothesis import given, strategies as st
 
-from src.loader import CompileLoader
+from elasticai.equichecker import CompileLoader
 
 
 def py_clamp_int(value: int, lower: int, upper: int) -> int:

@@ -100,8 +100,8 @@ You should see the existing tests run successfully.
 Create a new test file `tests/test_add_compile.py`:
 
 ```python
-from src.loader import CompileLoader
-from src.equivalence import compare_values
+from equichecker import CompileLoader
+from equichecker import compare_values
 
 # Initialize the loader with source and header files
 loader = CompileLoader(
@@ -115,11 +115,13 @@ lib = loader.load()
 # Retrieve the C function
 c_add = loader.get("add")
 
+
 def test_add_basic():
     """Test basic addition equivalence."""
     result_c = c_add(5, 7)
     expected = 5 + 7
     assert result_c == expected, f"Expected {expected}, got {result_c}"
+
 
 def test_add_edge_cases():
     """Test edge cases."""
@@ -145,7 +147,7 @@ Create `tests/test_clamp_compile.py`:
 
 ```python
 from hypothesis import given, strategies as st
-from src.loader import CompileLoader
+from equichecker import CompileLoader
 
 # Load the clamp function
 loader = CompileLoader(
@@ -155,9 +157,11 @@ loader = CompileLoader(
 lib = loader.load()
 c_clamp = loader.get("clamp_int")
 
+
 def py_clamp(value, lower, upper):
     """Python reference implementation."""
     return max(lower, min(upper, value))
+
 
 @given(
     value=st.integers(min_value=-1000, max_value=1000),
@@ -207,8 +211,8 @@ gcc -shared -fPIC -o c_funcs/windower/libwindower.so c_funcs/windower/windower.c
 Create `tests/test_add_precompiled.py`:
 
 ```python
-from src.loader import PrecompiledLoader
-from src.equivalence import compare_values
+from equichecker import PrecompiledLoader
+from equichecker import compare_values
 
 # Point to the pre-built .so file and the header
 loader = PrecompiledLoader(
@@ -221,6 +225,7 @@ lib = loader.load()
 
 # Retrieve the C function
 c_add = loader.get("add")
+
 
 def test_add_with_precompiled():
     """Test add function using pre-compiled library."""

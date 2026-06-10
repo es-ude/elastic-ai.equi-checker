@@ -1,2 +1,7 @@
-archive/
-build_*
+dist
+**/build_*
+**/.hypothesis
+**/.idea
+**/.venv
+**/venv
+elasticai/__init__.py

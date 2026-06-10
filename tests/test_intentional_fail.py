@@ -1,5 +1,4 @@
-from src.equivalence import compare_values
-from src.loader import CompileLoader
+from elasticai.equichecker import compare_values, CompileLoader
 
 
 def add_python_wrong(a: int, b: int) -> int:
@@ -25,4 +24,4 @@ def test_loader_equivalence_intentional_fail():
     passed, reason = compare_values(py_result, c_result)
 
     # Intentionally asserting equality to create a failing test.
-    assert passed, f"Equivalence failed (intentional demo): {reason}"
+    assert passed == False, f"Equivalence failed (intentional demo): {reason}"

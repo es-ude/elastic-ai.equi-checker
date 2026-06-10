@@ -12,6 +12,128 @@ dependencies = [
     "setuptools>=82.0.1",
 ]
 
+
+[dependency-groups]
+dev = [
+  "build>=1.2.2.post1",
+  "coverage>=7.11.3",
+  "hatch>=1.14.0",
+  "hatch-vcs>=0.4.0",
+  "pre-commit>=4.0.1",
+  "tach>=0.23.0"
+]
+utils = ["mypy>=1.13.0", "ruff>=0.11.0", "ty>=0.0.32", "tombi>=1.1.1"]
+
+
+
+[build-system]
+requires = ["hatch-vcs", "hatchling", "wheel"]
+build-backend = "hatchling.build"
+
+
+[tool.hatch.build.targets.sdist]
+where = ["."]
+include = ["elasticai"]
+exclude = [
+  ".venv",
+  "c_funcs",
+  "tests",
+  "**/*_test.py",
+  "**/test_*.py"
+]
+namespaces = false
+
+[tool.hatch.build.targets.wheel]
+packages = ["elasticai"]
+exclude = [
+  ".venv",
+  "c_funcs",
+  "tests",
+  "**/*_test.py",
+  "**/test_*.py"
+]
+only-packages = true
+
+
+[tool.ruff]
+include = [
+  "pyproject.toml",
+  "elasticai/**/*.py",
+]
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".git-rewrite",
+  ".hg",
+  ".ipynb_checkpoints",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pyenv",
+  ".pytest_cache",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  ".vscode",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "site-packages",
+  "venv",
+  ".devenv",
+]
+
+# Same as Black.
+line-length = 106
+indent-width = 4
+target-version = "py312"
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+select = ["E4", "E7", "E9", "F", "I"]
+ignore = ["D101", "D102", "E741", "E721", "E722"]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+[tool.ty.src]
+include = [
+    "elasticai/equichecker"
+]
+exclude = [
+  "README.md"
+]
+
+[tool.uv]
+default-groups = ["dev", "utils"]
+
+
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]

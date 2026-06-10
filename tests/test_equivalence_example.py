@@ -1,7 +1,7 @@
 from pathlib import Path
 import subprocess
 
-from src.loader import PrecompiledLoader, CompileLoader
+from elasticai.equichecker import PrecompiledLoader, CompileLoader
 
 FIXTURE_DIR = Path(__file__).resolve().parents[1] / "c_funcs" / "adder"
 HEADER = FIXTURE_DIR / "add.h"

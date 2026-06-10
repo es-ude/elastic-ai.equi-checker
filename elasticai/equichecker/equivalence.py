@@ -43,15 +43,11 @@ def compare_values(
             return ok, "both NaN" if ok else f"NaN mismatch: py={py_val}, c={c_val}"
 
         if math.isinf(py_val) or math.isinf(c_val):
-            same_sign_inf = (
-                math.isinf(py_val) and math.isinf(c_val) and (py_val > 0) == (c_val > 0)
-            )
+            same_sign_inf = math.isinf(py_val) and math.isinf(c_val) and (py_val > 0) == (c_val > 0)
             ok = inf_equal and same_sign_inf
             return (
                 ok,
-                "both Inf (same sign)"
-                if ok
-                else f"Inf mismatch: py={py_val}, c={c_val}",
+                "both Inf (same sign)" if ok else f"Inf mismatch: py={py_val}, c={c_val}",
             )
 
         diff = abs(py_val - c_val)

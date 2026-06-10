@@ -1,4 +1,4 @@
-from src.loader import CompileLoader
+from elasticai.equichecker import CompileLoader
 import numpy as np
 
 
